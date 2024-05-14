@@ -1,0 +1,419 @@
+﻿@page
+@model WebApplication2.Pages.ArchiveModel
+@{
+
+}
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f8f8;
+        margin: 0;
+        padding: 0;
+    }
+
+
+
+    .form-container {
+        margin-bottom: 20px;
+        text-align: left;
+    }
+
+    .table-container {
+        margin-top: 20px;
+        text-align: center; 
+    }
+
+    label {
+        font-weight: bold;
+        margin-right: 10px;
+    }
+
+    input[type="date"],
+    select {
+        padding: 8px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        width: 200px;
+        margin-right: 10px;
+    }
+
+    button {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 4px;
+        background-color: #001f3f;
+        color: #fff;
+        cursor: pointer;
+    }
+
+        button:hover {
+            background-color: #001f3f;
+        }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 0 auto;
+    }
+
+    th, td {
+        padding: 8px;
+        border-bottom: 1px solid #ddd;
+        text-align: center;
+    }
+
+    th {
+        background-color: #4682B4;
+        color: #fff;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+</style>
+
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="form-container">
+
+
+
+
+
+
+    <form method="post">
+        <label for="date1">From Date:</label>
+        <input type="date" id="date1" name="date1" />
+
+        <label for="date2">To Date:</label>
+        <input type="date" id="date2" name="date2" />
+
+        <label for="version">Version:</label>
+        <select id="version" name="version">
+            <option value="XC13">XC13</option>
+            <option value="F28A">F28A</option>
+            <option value="F28C">F28C</option>
+            <option value="ALL">ALL</option>
+        </select>
+
+        <button type="submit" name="filterBtn" value="Apply Filter">Filter</button>
+    </form>
+</div>
+
+<div class="form-container">
+    <form method="post">
+        <label for="QRCode">QRCode:</label>
+        <input type="text" id="qrcode" name="qrcode" />
+        <button type="submit" name="findBtn" value="Find">Find</button>
+    </form>
+    <form method="post">
+         <button type="submit" name="exportBtn" value="Export">Export </button>
+        <a href="/Archive/StatisticsPage">Go to Statistics</a>
+    </form>
+
+
+    
+
+</div>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+
+
+<div class="table-container">
+<table class="minimalistBlack" style="background-color: #fcfcfc">
+ 
+    <thead>
+        <tr>
+            <th>Actions</th>
+            <th>QRCode</th>
+            <th>Rework</th>
+            <th>State_WS10</th>
+            <th>Time_In_WS10</th>
+            <th>Time_Out_WS10</th>
+            <th>Force_outil1</th>
+            <th>Force_outil2</th>
+            <th>Position_Outil1</th>
+            <th>Position_Outil2</th>
+            <th>Status_Code_WS10</th>
+
+           
+          
+            <th>State_WS20</th>
+            <th>Time_In_WS20</th> 
+            <th>Time_Out_WS20 </th>
+            <th>Orifice1_Nm</th>
+            <th>Orifice1_A</th>
+            <th>Orifice2_Nm</th>
+
+            <th>Orifice2_A</th>
+            <th>Orifice3_Nm</th>
+            <th>Orifice3_A </th>
+
+            <th>Capot_Nm</th>
+            <th>Capot_A</th>
+            <th>Purge_Valve1_Nm</th>
+            <th>Purge_Valve1_A</th>
+            <th>Purge_Valve2_Nm </th>
+            <th>Purge_Valve2_A </th>
+            <th>Anti_Drain_Tube1_A</th>
+             <th>Anti_Drain_Tube1_Nm</th>
+            <th>Anti_Drain_Tube2_A</th>
+            <th>Anti_Drain_Tube2_Nm</th>
+             <th>Pump_A</th>
+            <th>Pump_Nm </th>
+            <th>Capot_Valve_A </th>
+            <th>Capot_Valve_Nm</th>
+            <th>Status_Code_WS20</th>
+
+
+            
+            <th>State_WS30</th>
+            <th>Time_In_WS30</th>
+             <th>Time_Out_WS30</th>
+            <th>Torque_Quick_Connector</th>
+            <th>Angle_Quick_Connector</th>
+            <th>Torque_CAP_1</th>
+            <th>Angle_CAP_1</th>
+            <th>Torque_CAP_2</th>
+            <th>Angle_CAP_2</th>
+            <th>Torque_Connector_2</th>
+            <th>Angle_Connector_2</th>
+            <th>Force_Therom_Valve</th>
+            <th>Statut_code_WS30</th>
+          
+
+            <th>State_WS40</th>
+            <th>Time_In_WS40 </th>
+            <th>Time_Out_WS40</th>
+            <th>Torque_Viss_1</th>
+            <th>Angle_Viss_1</th>
+            <th>Torque_Viss_2</th>
+
+            <th>Angle_Viss_2</th>
+            <th>Torque_Viss_3</th>
+            <th>Angle_Viss_3</th>
+            <th>Torque_WD_1</th>
+            <th>Angle_WD_1</th>
+            <th>Torque_WD_2</th>
+            <th>Angle_WD_2</th>
+            <th>Torque_WD_3</th>
+
+            <th>Angle_WD_3</th>
+            <th>Angle_Bush1</th>
+            <th>Torque_Bush1</th>
+            <th>Torque_Bush2</th>
+
+            <th>Angle_Bush2</th>
+            <th>Torque_Drain</th>
+            <th>Angle_Drain</th>
+            <th>Status_code_WS40</th>
+         
+
+            <th>State_WS50</th>
+            <th>Time_In_WS50</th>
+            <th>Time_Out_WS50</th>
+            <th>Pression_Inlet</th>
+            <th>Pression_Outlet</th>
+            <th> Status_Code_WS50</th>
+         
+            <th>State_WS60</th>
+            <th>Time_In_WS60</th>
+            <th>Time_Out_WS60</th>
+            <th>Sensor_F28_Nm</th>
+            <th>Sensor_F28_A</th>
+            <th>Conector_F28_Nm</th>
+            <th>Conector_F28_A</th>
+            <th>Heater_Conector_F28_Nm</th>
+            <th>Heater_Conector_F28_A</th>
+            <th>Thread_Conector_F28_Nm</th>
+            <th>Thread_Conector_F28_A</th>
+            <th>Conector1_XC13_Nm</th>
+            <th>Conector1_XC13_A</th>
+            <th>Conector2_XC13_Nm</th>
+            <th>Conector2_XC13_A</th>
+            <th>Conector3_XC13_Nm </th>
+            <th>Conector3_XC13_A </th>
+            <th>Conector4_XC13_Nm </th>
+            <th> Conector4_XC13_A</th>
+            <th>Metal_Plug_XC13_Nm</th>
+            <th>Metal_Plug_XC13_A</th>
+            <th>P_Sensor_XC13_Nm </th>
+            <th> P_Sensor_XC13_A</th>
+            <th>P_and_T_Sensor_XC13_Nm </th>
+            <th>P_and_T_Sensor_XC13_A</th>
+            <th>Status_Code_WS60</th>
+            <th>State_WS70</th>
+            <th>Time_In_WS70</th>
+            <th>Time_Out_WS70</th>
+            <th>Pression_Pre_Filter</th>
+            <th>Pression_Filter</th>
+            <th>Status_code_WS70</th>
+
+            <th>State_WS80</th>
+            <th>Time_In_WS80</th>
+            <th>Time_Out_WS80</th>
+            <th>Temp_Sensor_Ohm_AG</th>
+            <th>Heater_Ohm_AG</th>
+            <th>Temp_Senso_Ohm_CE</th>
+            <th>P_T_sensor_XC13</th>
+            <th>WD_TEMP_XC13</th>
+            <th>WD_SOLENOID_XC13</th>
+            <th>VOLTAGE_P_XC13</th>
+            <th>VOLTAGE_P_T_XC13</th>
+            <th>Status_code_WS80</th>
+        </tr>
+    </thead>
+   
+    <tbody>
+        @foreach (var archive in Model.ArchiveList)
+        {
+            <tr>
+          
+
+                <td>
+                  
+                        <a class="btn btn-primary btn-sm" style="background-color: #001f3f;" href="/Archive/Edit?QRCode=@archive.QRCode">EDIT</a>
+
+                </td>
+             
+                <td>@archive.QRCode</td>
+                <td>@archive.Rework</td>
+                <td>@archive.State_WS10</td>
+                <td>@archive.Time_In_WS10</td>
+                <td>@archive.Time_Out_WS10</td>
+                <td>@archive.Force_outil1</td>
+                <td>@archive.Force_outil2</td>
+                <td>@archive.Position_Outil1</td>
+                <td>@archive.Position_Outil2</td>
+                <td>@archive.Status_Code_WS10</td>
+                <td>@archive.State_WS20</td>
+                <td>@archive.Time_In_WS20</td> 
+                <td>@archive.Time_Out_WS20 </td>
+                <td>@archive.Orifice1_A</td>
+                <td>@archive.Orifice1_Nm</td>
+                 <td>@archive.Orifice2_A</td>
+                 <td>@archive.Orifice2_Nm</td>
+                 <td>@archive.Orifice3_A</td>
+                 <td>@archive.Orifice3_Nm </td>
+                 <td>@archive.Capot_Nm</td>
+                 <td>@archive.Capot_A</td>
+                 <td>@archive.Purge_Valve1_Nm</td>
+                 <td>@archive.Purge_Valve1_A</td>
+                 <td>@archive.Purge_Valve2_Nm </td>
+                 <td>@archive.Purge_Valve2_A </td>
+                 <td>@archive.Anti_Drain_Tube1_Nm</td>
+                 <td>@archive.Anti_Drain_Tube1_A</td>
+                 <td>@archive.Anti_Drain_Tube2_Nm</td>
+                 <td>@archive.Anti_Drain_Tube2_A</td>
+                 <td>@archive.Pump_Nm</td>
+                 <td>@archive.Pump_A </td>
+                 <td>@archive.Capot_Valve_Nm </td>
+                 <td>@archive.Capot_Valve_A</td>
+                 <td>@archive.Status_Code_WS20</td>
+                <td>@archive.State_WS30</td>
+                <td>@archive.Time_In_WS30</td>
+                <td>@archive.Time_Out_WS30</td>
+                <td>@archive.Torque_Quick_Connector</td>
+
+                <td>@archive.Angle_Quick_Connector</td>
+                <td>@archive.Torque_CAP_1</td>
+                <td>@archive.Angle_CAP_1</td>
+                <td>@archive.Torque_CAP_2</td>
+                <td>@archive.Angle_CAP_2</td>
+                <td>@archive.Torque_Connector_2</td>
+                <td>@archive.Angle_Connector_2</td>
+                <td>@archive.Force_Therom_Valve</td>
+                <td>@archive.Statut_code_WS30</td>
+                <td>@archive.State_WS40</td>
+                <td>@archive.Time_In_WS40 </td>
+                <td>@archive.Time_Out_WS40</td>
+                <td>@archive.Torque_Viss_1</td>
+                <td>@archive.Angle_Viss_1</td>
+                <td>@archive.Torque_Viss_2</td>
+
+                <td>@archive.Angle_Viss_2</td>
+                <td>@archive.Torque_Viss_3</td>
+                <td>@archive.Angle_Viss_3</td>
+                 <td>@archive.Torque_WD_1</td>
+                <td>@archive.Angle_WD_1</td>
+                <td>@archive.Torque_WD_2</td>
+                <td>@archive.Angle_WD_2</td>
+                <td>@archive.Torque_WD_3</td>
+
+                <td>@archive.Angle_WD_3</td>
+                <td>@archive.Angle_Bush1</td>
+                <td>@archive.Torque_Bush1</td>
+                 <td>@archive.Torque_Bush2</td>
+
+                <td>@archive.Angle_Bush2</td>
+                <td>@archive.Torque_Drain</td>
+                <td>@archive.Angle_Drain</td>
+                <td>@archive.Status_code_WS40</td>
+
+                <td>@archive.State_WS50</td>
+                <td>@archive.Time_In_WS50</td>
+                <td>@archive.Time_Out_WS50</td>
+                <td>@archive.Pression_Inlet</td>
+                <td>@archive.Pression_Outlet</td>
+                <td>@archive.Status_Code_WS50</td>
+
+
+
+                <td>@archive.State_WS60</td>
+                <td>@archive.Time_In_WS60</td>
+                <td>@archive.Time_Out_WS60</td>
+                <td>@archive.Sensor_F28_Nm</td>
+                <td>@archive.Sensor_F28_A</td>                    
+
+                <td>@archive.Conector_F28_Nm</td>
+                <td>@archive.Conector_F28_A</td>
+                <td>@archive.Heater_Conector_F28_Nm</td>
+                <td>@archive.Heater_Conector_F28_A</td>
+                <td>@archive.Thread_Conector_F28_Nm</td>
+                <td>@archive.Thread_Conector_F28_A</td>
+                <td>@archive.Conector1_XC13_Nm</td>
+                <td>@archive.Conector1_XC13_A</td>
+                <td>@archive.Conector2_XC13_Nm</td>
+                <td>@archive.Conector2_XC13_A</td>
+                <td>@archive.Conector3_XC13_Nm</td>
+                <td>@archive.Conector3_XC13_A</td>
+                <td>@archive.Conector4_XC13_Nm</td>
+                <td>@archive.Conector4_XC13_A</td>    
+                <td>@archive.Metal_Plug_XC13_Nm</td>
+                <td>@archive.Metal_Plug_XC13_A</td>
+                <td>@archive.P_Sensor_XC13_Nm</td>
+                <td>@archive.P_Sensor_XC13_A</td>
+                <td>@archive.P_and_T_Sensor_XC13_Nm</td>
+                <td>@archive.P_and_T_Sensor_XC13_A</td>
+                <td>@archive.Status_Code_WS60</td>
+                
+                <td>@archive.State_WS70</td>
+                <td>@archive.Time_In_WS70</td>
+                <td>@archive.Time_Out_WS70</td>
+                <td>@archive.Pression_Pre_Filter</td>
+                <td>@archive.Pression_Filter</td>
+                <td>@archive.Status_code_WS70</td>
+                <td>@archive.State_WS80</td>
+                <td>@archive.Time_In_WS80</td>
+                <td>@archive.Time_Out_WS80</td>
+                <td>@archive.Temp_Sensor_Ohm_AG</td>
+                <td>@archive.Heater_Ohm_AG</td>
+                <td>@archive.Temp_Senso_Ohm_CE</td>
+                <td>@archive.P_T_sensor_XC13</td>
+                <td>@archive.WD_TEMP_XC13</td>
+                <td>@archive.WD_SOLENOID_XC13</td>
+                <td>@archive.VOLTAGE_P_XC13</td>
+                <td>@archive.VOLTAGE_P_T_XC13</td>
+                <td>@archive.Status_code_WS80</td>
+
+
+              </tr>
+        }
+    </tbody>
+</table>
+</div>
+

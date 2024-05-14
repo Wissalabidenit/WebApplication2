@@ -1,0 +1,306 @@
+﻿@page
+@model StatisticsPageModel
+@using System.Globalization
+@using Microsoft.Data.SqlClient
+
+
+
+@functions {
+    private List<dynamic> GetDataFromDatabase()
+    {
+        string connectionString = "Data Source=WISSAL\\WINCC;Initial Catalog=database;Integrated Security=True;TrustServerCertificate=True;";
+        string query = "SELECT State_WS80, Time_In_WS10 FROM Table_Wiss WHERE State_WS80 = 'OK'";
+
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            SqlCommand command = new SqlCommand(query, connection);
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+
+            List<dynamic> data = new List<dynamic>();
+            while (reader.Read())
+            {
+                DateTime timeInWS10 = (DateTime)reader["Time_In_WS10"];
+                string monthName = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(timeInWS10.Month);
+                int year = timeInWS10.Year;
+
+                int currentYear = DateTime.Now.Year;
+
+                if (year == currentYear)
+                {
+                    var monthData = data.FirstOrDefault(d => d.MonthName == monthName && d.Year == year);
+                    if (monthData == null)
+                    {
+                        monthData = new
+                        {
+                            MonthName = monthName,
+                            Year = year,
+                            OKCount = 1
+                        };
+                        data.Add(monthData);
+                    }
+                    else
+                    {
+                        monthData.OKCount++;
+                    }
+                }
+            }
+
+            return data;
+        }
+    }
+
+    private List<dynamic> GetChartDataFromDatabase()
+    {
+        string connectionString = "Data Source=WISSAL\\WINCC;Initial Catalog=database;Integrated Security=True;TrustServerCertificate=True;";
+        string query = "SELECT LEFT(QRCode, 4) AS Version, COUNT(*) AS PieceCount FROM Table_Wiss GROUP BY LEFT(QRCode, 4) ORDER BY Version";
+
+        List<dynamic> chartData = new List<dynamic>();
+
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            SqlCommand command = new SqlCommand(query, connection);
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                var dataPoint = new
+                {
+                    Version = reader["Version"].ToString(),
+                    PieceCount = Convert.ToInt32(reader["PieceCount"])
+                };
+                chartData.Add(dataPoint);
+            }
+        }
+
+        return chartData;
+    }
+}
+
+@{
+    var data = GetDataFromDatabase();
+    var chartData = new
+    {
+        labels = data.Select(d => $"{d.MonthName} {d.Year}"), // Month and Year as labels on the x-axis
+        datasets = new[]
+        {
+            new
+            {
+                label = "Count of Non-Defective Pieces per Months",
+                data = data.Select(d => d.OKCount),
+                backgroundColor = "rgba(54, 162, 235, 0.6)", // Blue
+                borderColor = "rgba(54, 162, 235, 1)", // Border
+                borderWidth = 1
+            }
+        }
+    };
+
+    var chart_Data = GetChartDataFromDatabase();
+    var chart_Data1 = new
+    {
+        labels = chart_Data.Select(d => d.Version), // Version on the x-axis
+        datasets = new[]
+        {
+            new
+            {
+                
+                  label = "Count of Non-Defective Pieces by version",
+                data = chart_Data.Select(d => d.PieceCount),
+                backgroundColor = "rgba(54, 162, 235, 0.6)", // Blue
+                borderColor = "rgba(54, 162, 235, 1)", // Border
+                borderWidth = 1
+            }
+        }
+    };
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: "Trebuchet MS", Helvetica, sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+        }
+
+        .statistics-container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .ok-pieces-container {
+            background-color: #4682b4;
+            border-radius: 8px;
+            padding: 20px;
+            color: #fff;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        canvas {
+            width: 100%;
+            height: auto;
+            margin-top: 20px;
+        }
+
+        .chart-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .btn-close {
+            background-color: #4682b4;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+            .btn-close:hover {
+                background-color: #4682b4;
+            }
+
+        .close-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center mb-4">Stati</h2>
+
+        <div class="ok-pieces-container">
+            <h3>Ok Pieces Count:</h3>
+            <p>@Model.OkPiecesCount</p>
+        </div>
+
+        <div class="close-button">
+            <button type="button" class="btn btn-close" onclick="window.location.href='/Archive'"></button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="statistics-container">
+                    <h3 class="chart-title">Count of Non-Defective Pieces per Month</h3>
+                    <canvas id="myChart"></canvas>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="statistics-container">
+                    <h3 class="chart-title">Count of Non-Defective Pieces by Version</h3>
+                    <canvas id="mySecondChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        var chartData = @Html.Raw(Json.Serialize(chartData));
+        var chart_Data1 = @Html.Raw(Json.Serialize(chart_Data1));
+
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: chartData,
+            options: {
+                animation: {
+                    duration: 1500,
+                    easing: 'easeInOutQuint'
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                            stepSize: 1
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Number of OK Pieces',
+                            fontSize: 16
+                        }
+                    }],
+                    xAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Month and Year',
+                            fontSize: 16
+                        }
+                    }]
+                },
+                title: {
+                    display: true,
+                    text: 'Count of Non-Defective Pieces per Month',
+                    fontSize: 20,
+                    fontColor: '#333333'
+                },
+                legend: {
+                    display: false
+                }
+            }
+        });
+
+        var ctx2 = document.getElementById('mySecondChart').getContext('2d');
+        var mysecondChart = new Chart(ctx2, {
+            type: 'bar',
+            data: chart_Data1,
+            options: {
+                animation: {
+                    duration: 1500,
+                    easing: 'easeInOutQuint'
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                            stepSize: 1
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Number of Pieces',
+                            fontSize: 16
+                        }
+                    }],
+                    xAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Version',
+                            fontSize: 16
+                        }
+                    }]
+                },
+                title: {
+                    display: true,
+                    text: 'Count of Non-Defective Pieces by Version',
+                    fontSize: 20,
+                    fontColor: '#333333'
+                },
+                legend: {
+                    display: false
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Database Management Portal</title>
+    <style>
+        body {
+            font-family: "Trebuchet MS", Helvetica, sans-serif;
+            background-image: url('/image/three.jpg');
+            background-size: cover;
+            color: #000;
+            margin: 0;
+            padding: 0;
+        }
+
+        .overlay {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 900px;
+            margin: 70px auto;
+            padding: 70px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+
+        h1 {
+            color: #4682b4;
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 20px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        ul {
+            list-style-type: disc;
+            margin-left: 20px;
+            text-align: left;
+        }
+
+        li {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="overlay">
+        <div class="container">
+            <h1>Welcome to Your Database Management Portal</h1>
+            <p>With our website, you have the power to efficiently manage and explore your database. Here's what you can do:</p>
+            <ul>
+                <li>Search and Filter: Easily search for specific data and apply filters to refine your results.</li>
+                <li>View and Analyze: Visualize your data with charts, graphs, and customizable reports.</li>
+                <li>Update and Edit: Make changes to your database records directly through our user-friendly interface.</li>
+                <li>Secure Access: Ensure data security with role-based access control and authentication features.</li>
+                <li>Export and Share: Export data in various formats and share insights with colleagues or clients.</li>
+            </ul>
+            <p>Get started now and take control of your data management tasks with ease!</p>
+        </div>
+    </div>
+</body>
+
+</html>

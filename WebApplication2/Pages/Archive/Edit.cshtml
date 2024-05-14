@@ -1,0 +1,518 @@
+﻿@page
+@model WebApplication2.Pages.Archive.EditModel
+
+<h2>Edit</h2>
+@if (!string.IsNullOrEmpty(Model.errorMessage))
+{
+    <div class="alert alert-danger">@Model.errorMessage</div>
+}
+
+@if (!string.IsNullOrEmpty(Model.successMessage))
+{
+    <div class="alert alert-success">@Model.successMessage</div>
+}
+
+<form method="POST">
+    <input type="hidden" name="QRCode" value="@Model.archiveinfo.QRCode">
+
+    <table class="table">
+        <tr>
+            <td>Rework</td>
+            <td><input type="number" class="form-control" name="Rework" value="@Model.archiveinfo.Rework"></td>
+        </tr>
+        <tr>
+            <td>State_WS10</td>
+            <td><input type="text" class="form-control" name="State_WS10" value="@Model.archiveinfo.State_WS10"></td>
+        </tr>
+        <tr>
+            <td>Time_In_WS10</td>
+            <td><input type="datetime" class="form-control" name="Time_In_WS10" value="@Model.archiveinfo.Time_In_WS10"></td>
+        </tr>
+        <tr>
+            <td>Time_Out_WS10</td>
+            <td><input type="datetime" class="form-control" name="Time_Out_WS10" value="@Model.archiveinfo.Time_Out_WS10"></td>
+        </tr>
+        <tr>
+            <td>Force_outil1</td>
+            <td><input type="text" class="form-control" name="Force_outil1" value="@Model.archiveinfo.Force_outil1"></td>
+        </tr>
+        <tr>
+            <td>Force_outil2</td>
+            <td><input type="text" class="form-control" name="Force_outil2" value="@Model.archiveinfo.Force_outil2"></td>
+        </tr>
+        <tr>
+            <td>Position_Outil1</td>
+            <td><input type="text" class="form-control" name="Position_Outil1" value="@Model.archiveinfo.Position_Outil1"></td>
+        </tr>
+        <tr>
+            <td>Position_Outil2</td>
+            <td><input type="text" class="form-control" name="Position_Outil2" value="@Model.archiveinfo.Position_Outil2"></td>
+        </tr>
+        <tr>
+            <td>Status_Code_WS10</td>
+            <td><input type="text" class="form-control" name="Status_Code_WS10" value="@Model.archiveinfo.Status_Code_WS10"></td>
+        </tr>
+        <tr>
+            <td>State_WS20</td>
+            <td><input type="text" class="form-control" name="State_WS20" value="@Model.archiveinfo.State_WS20"></td>
+        </tr>
+        <tr>
+            <td>Time_In_WS20</td>
+            <td><input type="datetime" class="form-control" name="Time_In_WS20" value="@Model.archiveinfo.Time_In_WS20"></td>
+        </tr>
+        <tr>
+            <td>Time_Out_WS20</td>
+            <td><input type="datetime" class="form-control" name="Time_Out_WS20" value="@Model.archiveinfo.Time_Out_WS20"></td>
+        </tr>
+        <tr>
+            <td>Orifice1_Nm</td>
+            <td><input type="text" class="form-control" name="Orifice1_Nm" value="@Model.archiveinfo.Orifice1_Nm"></td>
+        </tr>
+        <tr>
+            <td>Orifice1_A</td>
+            <td><input type="text" class="form-control" name="Orifice1_A" value="@Model.archiveinfo.Orifice1_A"></td>
+        </tr>
+
+        <tr>
+            <td>Orifice2_Nm</td>
+            <td><input type="text" class="form-control" name="Orifice2_Nm" value="@Model.archiveinfo.Orifice2_Nm"></td>
+        </tr>
+        <tr>
+            <td>Orifice2_A</td>
+            <td><input type="text" class="form-control" name="Orifice2_A" value="@Model.archiveinfo.Orifice2_A"></td>
+        </tr>
+        <tr>
+            <td>Orifice3_Nm</td>
+            <td><input type="text" class="form-control" name="Orifice3_Nm" value="@Model.archiveinfo.Orifice3_Nm"></td>
+        </tr>
+                <tr>
+            <td>Orifice3_A</td>
+            <td><input type="text" class="form-control" name="Orifice3_A" value="@Model.archiveinfo.Orifice3_A"></td>
+        </tr>
+
+        <tr>
+            <td>Capot_Nm</td>
+            <td><input type="text" class="form-control" name="Capot_Nm" value="@Model.archiveinfo.Capot_Nm"></td>
+        </tr>
+                <tr>
+            <td>Capot_A</td>
+            <td><input type="text" class="form-control" name="Capot_A" value="@Model.archiveinfo.Capot_A"></td>
+        </tr>
+         <tr>
+            <td>Purge_Valve1_Nm</td>
+            <td><input type="text" class="form-control" name="Purge_Valve1_Nm" value="@Model.archiveinfo.Purge_Valve1_Nm"></td>
+        </tr>
+        <tr>
+            <td>Purge_Valve1_A</td>
+            <td><input type="text" class="form-control" name="Purge_Valve1_A" value="@Model.archiveinfo.Purge_Valve1_A"></td>
+        </tr>
+        <tr>
+            <td>Purge_Valve2_Nm</td>
+            <td><input type="text" class="form-control" name="Purge_Valve2_Nm" value="@Model.archiveinfo.Purge_Valve2_Nm"></td>
+        </tr>
+
+        <tr>
+            <td>Purge_Valve2_A</td>
+            <td><input type="text" class="form-control" name="Purge_Valve2_A" value="@Model.archiveinfo.Purge_Valve2_A"></td>
+        </tr>
+        <tr>
+            <td>Anti_Drain_Tube1_Nm</td>
+            <td><input type="text" class="form-control" name="Anti_Drain_Tube1_Nm" value="@Model.archiveinfo.Anti_Drain_Tube1_Nm"></td>
+        </tr>
+        <tr>
+            <td>Anti_Drain_Tube1_A</td>
+            <td><input type="text" class="form-control" name="Anti_Drain_Tube1_A" value="@Model.archiveinfo.Anti_Drain_Tube1_A"></td>
+        </tr>
+        <tr>
+            <td>Anti_Drain_Tube2_Nm</td>
+            <td><input type="text" class="form-control" name="Anti_Drain_Tube2_Nm" value="@Model.archiveinfo.Anti_Drain_Tube2_Nm"></td>
+        </tr>
+
+        <tr>
+            <td>Anti_Drain_Tube2_A</td>
+            <td><input type="text" class="form-control" name="Anti_Drain_Tube2_A" value="@Model.archiveinfo.Anti_Drain_Tube2_A"></td>
+        </tr>
+        <tr>
+            <td>Pump_Nm</td>
+            <td><input type="text" class="form-control" name="Pump_Nm" value="@Model.archiveinfo.Pump_Nm"></td>
+        </tr>
+        <tr>
+            <td>Pump_A</td>
+            <td><input type="text" class="form-control" name="Pump_A" value="@Model.archiveinfo.Pump_A"></td>
+        </tr>
+        <tr>
+            <td>Capot_Valve_Nm</td>
+            <td><input type="text" class="form-control" name="Capot_Valve_Nm" value="@Model.archiveinfo.Capot_Valve_Nm"></td>
+        </tr>
+        <tr>
+            <td>Capot_Valve_A</td>
+            <td><input type="text" class="form-control" name="Capot_Valve_A" value="@Model.archiveinfo.Capot_Valve_A"></td>
+        </tr>
+
+        <tr>
+            <td>Status_Code_WS20</td>
+            <td><input type="number" class="form-control" name="Status_Code_WS20" value="@Model.archiveinfo.Status_Code_WS20"></td>
+        </tr>
+        <tr>
+            <td>State_WS30</td>
+            <td><input type="text" class="form-control" name="State_WS30" value="@Model.archiveinfo.State_WS30"></td>
+        </tr>
+        <tr>
+            <td>Time_In_WS30</td>
+            <td><input type="datetime" class="form-control" name="Time_In_WS30" value="@Model.archiveinfo.Time_In_WS30"></td>
+        </tr>
+        <tr>
+            <td>Time_Out_WS30</td>
+            <td><input type="datetime" class="form-control" name="Time_Out_WS30" value="@Model.archiveinfo.Time_Out_WS30"></td>
+        </tr>
+        <tr>
+            <td>Torque_Quick_Connector</td>
+            <td><input type="text" class="form-control" name="Torque_Quick_Connector" value="@Model.archiveinfo.Torque_Quick_Connector"></td>
+        </tr>
+
+        <tr>
+            <td>Angle_Quick_Connector</td>
+            <td><input type="text" class="form-control" name="Angle_Quick_Connector" value="@Model.archiveinfo.Angle_Quick_Connector"></td>
+        </tr>
+        <tr>
+            <td>Torque_CAP_1</td>
+            <td><input type="text" class="form-control" name="Torque_CAP_1" value="@Model.archiveinfo.Torque_CAP_1"></td>
+        </tr>
+        <tr>
+            <td>Angle_CAP_1</td>
+            <td><input type="text" class="form-control" name="Angle_CAP_1" value="@Model.archiveinfo.Angle_CAP_1"></td>
+        </tr>
+        <tr>
+            <td>Torque_CAP_2</td>
+            <td><input type="text" class="form-control" name="Torque_CAP_2" value="@Model.archiveinfo.Torque_CAP_2"></td>
+        </tr>
+
+        <tr>
+            <td>Angle_CAP_2</td>
+            <td><input type="text" class="form-control" name="Angle_CAP_2" value="@Model.archiveinfo.Angle_CAP_2"></td>
+        </tr>
+        <tr>
+            <td>Torque_Connector_2</td>
+            <td><input type="text" class="form-control" name="Torque_Connector_2" value="@Model.archiveinfo.Torque_Connector_2"></td>
+        </tr>
+        <tr>
+            <td>Angle_Connector_2</td>
+            <td><input type="text" class="form-control" name="Angle_Connector_2" value="@Model.archiveinfo.Angle_Connector_2"></td>
+        </tr>
+        <tr>
+            <td>Force_Therom_Valve</td>
+            <td><input type="text" class="form-control" name="Force_Therom_Valve" value="@Model.archiveinfo.Force_Therom_Valve"></td>
+        </tr>
+
+        <tr>
+            <td>Statut_code_WS30</td>
+            <td><input type="number" class="form-control" name="Statut_code_WS30" value="@Model.archiveinfo.Statut_code_WS30"></td>
+        </tr>
+        <tr>
+            <td>State_WS40</td>
+            <td><input type="text" class="form-control" name="State_WS40" value="@Model.archiveinfo.State_WS40"></td>
+        </tr>
+        <tr>
+            <td>Time_In_WS40</td>
+            <td><input type="datetime" class="form-control" name="Time_In_WS40" value="@Model.archiveinfo.Time_In_WS40"></td>
+        </tr>
+        <tr>
+            <td>Time_Out_WS40</td>
+            <td><input type="datetime" class="form-control" name="Time_Out_WS40" value="@Model.archiveinfo.Time_Out_WS40"></td>
+        </tr>
+        <tr>
+            <td>Torque_Viss_1</td>
+            <td><input type="text" class="form-control" name="Torque_Viss_1" value="@Model.archiveinfo.Torque_Viss_1"></td>
+        </tr>
+
+        <tr>
+            <td>Angle_Viss_1</td>
+            <td><input type="text" class="form-control" name="Angle_Viss_1" value="@Model.archiveinfo.Angle_Viss_1"></td>
+        </tr>
+        <tr>
+            <td>Torque_Viss_2</td>
+            <td><input type="text" class="form-control" name="Torque_Viss_2" value="@Model.archiveinfo.Torque_Viss_2"></td>
+        </tr>
+
+        <tr>
+            <td>Angle_Viss_2</td>
+            <td><input type="text" class="form-control" name="Angle_Viss_2" value="@Model.archiveinfo.Angle_Viss_2"></td>
+        </tr>
+        <tr>
+            <td>Torque_Viss_3</td>
+            <td><input type="text" class="form-control" name="Torque_Viss_3" value="@Model.archiveinfo.Torque_Viss_3"></td>
+        </tr>
+
+        <tr>
+            <td>Angle_Viss_3</td>
+            <td><input type="text" class="form-control" name="Angle_Viss_3" value="@Model.archiveinfo.Angle_Viss_3"></td>
+        </tr>
+        <tr>
+            <td>Torque_WD_1</td>
+            <td><input type="text" class="form-control" name="Torque_WD_1" value="@Model.archiveinfo.Torque_WD_1"></td>
+        </tr>
+        <tr>
+            <td>Angle_WD_1</td>
+            <td><input type="text" class="form-control" name="Angle_WD_1" value="@Model.archiveinfo.Angle_WD_1"></td>
+        </tr>
+                <tr>
+            <td>Torque_WD_2</td>
+            <td><input type="text" class="form-control" name="Torque_WD_2" value="@Model.archiveinfo.Torque_WD_2"></td>
+        </tr>
+        <tr>
+            <td>Angle_WD_2</td>
+            <td><input type="text" class="form-control" name="Angle_WD_2" value="@Model.archiveinfo.Angle_WD_2"></td>
+        </tr>
+        <tr>
+            <td>Torque_WD_3</td>
+            <td><input type="text" class="form-control" name="Torque_WD_3" value="@Model.archiveinfo.Torque_WD_3"></td>
+        </tr>
+        <tr>
+            <td>Angle_WD_3</td>
+            <td><input type="text" class="form-control" name="Angle_WD_3" value="@Model.archiveinfo.Angle_WD_3"></td>
+        </tr>
+        <tr>
+            <td>Angle_Bush1</td>
+            <td><input type="text" class="form-control" name="Angle_Bush1" value="@Model.archiveinfo.Angle_Bush1"></td>
+        </tr>
+
+        <tr>
+            <td>Torque_Bush1</td>
+            <td><input type="text" class="form-control" name="Torque_Bush1" value="@Model.archiveinfo.Torque_Bush1"></td>
+        </tr>
+        <tr>
+            <td>Torque_Bush2</td>
+            <td><input type="text" class="form-control" name="Torque_Bush2" value="@Model.archiveinfo.Torque_Bush2"></td>
+        </tr>
+        <tr>
+            <td>Angle_Bush2</td>
+            <td><input type="text" class="form-control" name="Angle_Bush2" value="@Model.archiveinfo.Angle_Bush2"></td>
+        </tr>
+
+
+        <tr>
+            <td>Torque_Drain</td>
+            <td><input type="text" class="form-control" name="Torque_Drain" value="@Model.archiveinfo.Torque_Drain"></td>
+        </tr>
+
+        <tr>
+            <td>Angle_Drain</td>
+            <td><input type="text" class="form-control" name="Angle_Drain" value="@Model.archiveinfo.Angle_Drain"></td>
+        </tr>
+        <tr>
+            <td>Status_code_WS40</td>
+            <td><input type="number" class="form-control" name="Status_code_WS40" value="@Model.archiveinfo.Status_code_WS40"></td>
+        </tr>
+        <tr>
+            <td>State_WS50</td>
+            <td><input type="text" class="form-control" name="State_WS50" value="@Model.archiveinfo.State_WS50"></td>
+        </tr>
+        <tr>
+            <td>Time_In_WS50</td>
+            <td><input type="datetime" class="form-control" name="Time_In_WS50" value="@Model.archiveinfo.Time_In_WS50"></td>
+        </tr>
+        <tr>
+            <td>Time_Out_WS50</td>
+            <td><input type="datetime" class="form-control" name="Time_Out_WS50" value="@Model.archiveinfo.Time_Out_WS50"></td>
+        </tr>
+
+        <tr>
+            <td>Pression_Inlet</td>
+            <td><input type="number" class="form-control" name="Pression_Inlet" value="@Model.archiveinfo.Pression_Inlet"></td>
+        </tr>
+        <tr>
+            <td>Pression_Outlet</td>
+            <td><input type="number" class="form-control" name="Pression_Outlet" value="@Model.archiveinfo.Pression_Outlet"></td>
+        </tr>
+        <tr>
+            <td>Status_Code_WS50</td>
+            <td><input type="number" class="form-control" name="Status_Code_WS50" value="@Model.archiveinfo.Status_Code_WS50"></td>
+        </tr>
+        <tr>
+            <td>State_WS60</td>
+            <td><input type="text" class="form-control" name="State_WS60" value="@Model.archiveinfo.State_WS60"></td>
+        </tr>
+
+        <tr>
+            <td>Time_In_WS60</td>
+            <td><input type="datetime" class="form-control" name="Time_In_WS60" value="@Model.archiveinfo.Time_In_WS60"></td>
+        </tr>
+        <tr>
+            <td>Time_Out_WS60</td>
+            <td><input type="datetime" class="form-control" name="Time_Out_WS60" value="@Model.archiveinfo.Time_Out_WS60"></td>
+        </tr>
+        <tr>
+            <td>Sensor_F28_Nm</td>
+            <td><input type="text" class="form-control" name="Sensor_F28_Nm" value="@Model.archiveinfo.Sensor_F28_Nm"></td>
+        </tr>
+        <tr>
+            <td>Sensor_F28_A</td>
+            <td><input type="text" class="form-control" name="Sensor_F28_A" value="@Model.archiveinfo.Sensor_F28_A"></td>
+        </tr>
+        <tr>
+            <td>Conector_F28_Nm</td>
+            <td><input type="text" class="form-control" name="Conector_F28_Nm" value="@Model.archiveinfo.Conector_F28_Nm"></td>
+        </tr>
+        <tr>
+            <td>Conector_F28_A</td>
+            <td><input type="text" class="form-control" name="Conector_F28_A" value="@Model.archiveinfo.Conector_F28_A"></td>
+        </tr>
+        <tr>
+            <td>Heater_Conector_F28_Nm</td>
+            <td><input type="text" class="form-control" name="Heater_Conector_F28_Nm" value="@Model.archiveinfo.Heater_Conector_F28_Nm"></td>
+        </tr>
+
+        <tr>
+            <td>Heater_Conector_F28_A</td>
+            <td><input type="text" class="form-control" name="Heater_Conector_F28_A" value="@Model.archiveinfo.Heater_Conector_F28_A"></td>
+        </tr>
+        <tr>
+            <td>Thread_Conector_F28_Nm</td>
+            <td><input type="text" class="form-control" name="Thread_Conector_F28_Nm" value="@Model.archiveinfo.Thread_Conector_F28_Nm"></td>
+        </tr>
+        <tr>
+            <td>Thread_Conector_F28_A</td>
+            <td><input type="text" class="form-control" name="Thread_Conector_F28_A" value="@Model.archiveinfo.Thread_Conector_F28_A"></td>
+        </tr>
+        <tr>
+            <td>Conector1_XC13_Nm</td>
+            <td><input type="text" class="form-control" name="Conector1_XC13_Nm" value="@Model.archiveinfo.Conector1_XC13_Nm"></td>
+        </tr>
+
+        <tr>
+            <td>Conector1_XC13_A</td>
+            <td><input type="text" class="form-control" name="Conector1_XC13_A" value="@Model.archiveinfo.Conector1_XC13_A"></td>
+        </tr>
+        <tr>
+            <td>Conector2_XC13_Nm</td>
+            <td><input type="text" class="form-control" name="Conector2_XC13_Nm" value="@Model.archiveinfo.Conector2_XC13_Nm"></td>
+        </tr>
+        <tr>
+            <td>Conector2_XC13_A</td>
+            <td><input type="text" class="form-control" name="Conector2_XC13_A" value="@Model.archiveinfo.Conector2_XC13_A"></td>
+        </tr>
+        <tr>
+            <td>Conector3_XC13_Nm</td>
+            <td><input type="text" class="form-control" name="Conector3_XC13_Nm" value="@Model.archiveinfo.Conector3_XC13_Nm"></td>
+        </tr>
+        <tr>
+            <td>Conector3_XC13_A</td>
+            <td><input type="text" class="form-control" name="Conector3_XC13_A" value="@Model.archiveinfo.Conector3_XC13_A"></td>
+        </tr>
+        <tr>
+            <td>Conector4_XC13_Nm</td>
+            <td><input type="text" class="form-control" name="Conector4_XC13_Nm" value="@Model.archiveinfo.Conector4_XC13_Nm"></td>
+        </tr>
+        <tr>
+            <td>Conector4_XC13_A</td>
+            <td><input type="text" class="form-control" name="Conector4_XC13_A" value="@Model.archiveinfo.Conector4_XC13_A"></td>
+        </tr>
+        <tr>
+            <td>Metal_Plug_XC13_Nm</td>
+            <td><input type="text" class="form-control" name="Metal_Plug_XC13_Nm" value="@Model.archiveinfo.Metal_Plug_XC13_Nm"></td>
+        </tr>
+                <tr>
+            <td>Metal_Plug_XC13_A</td>
+            <td><input type="text" class="form-control" name="Metal_Plug_XC13_A" value="@Model.archiveinfo.Metal_Plug_XC13_A"></td>
+        </tr>
+                <tr>
+            <td>P_Sensor_XC13_Nm</td>
+            <td><input type="text" class="form-control" name="P_Sensor_XC13_Nm" value="@Model.archiveinfo.P_Sensor_XC13_Nm"></td>
+        </tr>
+                <tr>
+            <td>P_Sensor_XC13_A</td>
+            <td><input type="text" class="form-control" name="P_Sensor_XC13_A" value="@Model.archiveinfo.P_Sensor_XC13_A"></td>
+        </tr>
+        <tr>
+            <td>P_and_T_Sensor_XC13_Nm</td>
+            <td><input type="text" class="form-control" name="P_and_T_Sensor_XC13_Nm" value="@Model.archiveinfo.P_and_T_Sensor_XC13_Nm"></td>
+        </tr>
+        <tr>
+            <td>P_and_T_Sensor_XC13_A</td>
+            <td><input type="text" class="form-control" name="P_and_T_Sensor_XC13_A" value="@Model.archiveinfo.P_and_T_Sensor_XC13_A"></td>
+        </tr>
+        <tr>
+            <td>Status_Code_WS60</td>
+            <td><input type="number" class="form-control" name="Status_Code_WS60" value="@Model.archiveinfo.Status_Code_WS60"></td>
+        </tr>
+
+
+        <tr>
+            <td>State_WS70</td>
+            <td><input type="text" class="form-control" name="State_WS70" value="@Model.archiveinfo.State_WS70"></td>
+        </tr>
+        <tr>
+            <td>Time_In_WS70</td>
+            <td><input type="datetime" class="form-control" name="Time_In_WS70" value="@Model.archiveinfo.Time_In_WS70"></td>
+        </tr>
+        <tr>
+            <td>Time_Out_WS70</td>
+            <td><input type="datetime" class="form-control" name="Time_Out_WS70" value="@Model.archiveinfo.Time_Out_WS70"></td>
+        </tr>
+        <tr>
+            <td>Pression_Pre_Filter</td>
+            <td><input type="text" class="form-control" name="Pression_Pre_Filter" value="@Model.archiveinfo.Pression_Pre_Filter"></td>
+        </tr>
+        <tr>
+            
+            <td>Pression_Filter</td>
+            <td><input type="text" class="form-control" name="Pression_Filter" value="@Model.archiveinfo.Pression_Filter"></td>
+        </tr>
+        <tr>
+            <td>Status_code_WS70</td>
+            <td><input type="number" class="form-control" name="Status_code_WS70" value="@Model.archiveinfo.Status_code_WS70"></td>
+        </tr>
+        <tr>
+            <td>State_WS80</td>
+            <td><input type="text" class="form-control" name="State_WS80" value="@Model.archiveinfo.State_WS80"></td>
+        </tr>
+        <tr>
+            <td>Time_In_WS80</td>
+            <td><input type="datetime" class="form-control" name="Time_In_WS80" value="@Model.archiveinfo.Time_In_WS80"></td>
+        </tr>
+        <tr>
+            <td>Time_Out_WS80</td>
+            <td><input type="datetime" class="form-control" name="Time_Out_WS80" value="@Model.archiveinfo.Time_Out_WS80"></td>
+        </tr>
+        <tr>
+            <td>Temp_Sensor_Ohm_AG/td>
+            <td><input type="text" class="form-control" name="Temp_Sensor_Ohm_AG" value="@Model.archiveinfo.Temp_Sensor_Ohm_AG"></td>
+        </tr>
+        <tr>
+            <td>Heater_Ohm_AG</td>
+            <td><input type="text" class="form-control" name="Heater_Ohm_AG" value="@Model.archiveinfo.Heater_Ohm_AG"></td>
+        </tr>
+        <tr>
+            <td>Temp_Senso_Ohm_CE</td>
+            <td><input type="text" class="form-control" name="Temp_Senso_Ohm_CE" value="@Model.archiveinfo.Temp_Senso_Ohm_CE"></td>
+        </tr>
+        <tr>
+            <td>P_T_sensor_XC13</td>
+            <td><input type="text" class="form-control" name="P_T_sensor_XC13" value="@Model.archiveinfo.P_T_sensor_XC13"></td>
+        </tr>
+        <tr>
+            <td>WD_TEMP_XC13</td>
+            <td><input type="text" class="form-control" name="WD_TEMP_XC13" value="@Model.archiveinfo.WD_TEMP_XC13"></td>
+        </tr>
+        <tr>
+            <td>WD_SOLENOID_XC13</td>
+            <td><input type="text" class="form-control" name="WD_SOLENOID_XC13" value="@Model.archiveinfo.WD_SOLENOID_XC13"></td>
+        </tr>
+        <tr>
+            <td>VOLTAGE_P_XC13</td>
+            <td><input type="text" class="form-control" name="VOLTAGE_P_XC13" value="@Model.archiveinfo.VOLTAGE_P_XC13"></td>
+        </tr>
+        <tr>
+            <td>VOLTAGE_P_T_XC13</td>
+            <td><input type="text" class="form-control" name="VOLTAGE_P_T_XC13" value="@Model.archiveinfo.VOLTAGE_P_T_XC13"></td>
+        </tr>
+        <tr>
+            <td>Status_code_WS80</td>
+            <td><input type="number" class="form-control" name="Status_code_WS80" value="@Model.archiveinfo.Status_code_WS80"></td>
+        </tr>
+    </table>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="button" class="btn btn-primary" onclick="window.location.href='/Archive'">Close</button>
+
+</form>

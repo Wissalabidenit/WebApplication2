@@ -1,0 +1,141 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+/*
+html {
+    position: relative;
+    min-height: 100%;
+   /* background: url('/image/backround.jpg') no-repeat center center fixed;
+    background-size: cover;
+}*/
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+/*
+body {
+    margin-bottom: 60px;
+     background: black;
+   
+    background: url('/image/backround.jpg') no-repeat center center fixed;
+    background-size: cover;
+}*/
+
+table.minimalistBlack {
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    border: 0px solid #000000;
+    width: 100%;
+    height: 200px;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+    table.minimalistBlack td, table.minimalistBlack th {
+        padding: 5px 4px;
+    }
+
+    table.minimalistBlack tbody td {
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+    table.minimalistBlack tr:nth-child(even) {
+        background: #D0E4F5;
+    }
+
+    table.minimalistBlack thead {
+        background: #C2D2E5;
+        background: -moz-linear-gradient(top, #d1ddeb 0%, #c8d6e7 66%, #C2D2E5 100%);
+        background: -webkit-linear-gradient(top, #d1ddeb 0%, #c8d6e7 66%, #C2D2E5 100%);
+        background: linear-gradient(to bottom, #d1ddeb 0%, #c8d6e7 66%, #C2D2E5 100%);
+        border-bottom: 1px solid #000000;
+    }
+
+        table.minimalistBlack thead th {
+            font-size: 17px;
+            font-weight: bold;
+            color: #000000;
+            text-align: center;
+            border-left: 1px solid #D8EAFF;
+        }
+
+            table.minimalistBlack thead th:first-child {
+                border-left: none;
+            }
+
+    table.minimalistBlack tfoot td {
+        font-size: 11px;
+    }
+
+
+
+#chart {
+    height: 440px;
+}
+
+?
+.tooltip-header {
+    margin-bottom: 5px;
+    font-size: 16px;
+    font-weight: 500;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #c5c5c5;
+}
+
+?
+.tooltip-body {
+    width: 170px;
+}
+
+    ?
+    .tooltip-body .series-name {
+        font-weight: normal;
+        opacity: 0.6;
+        display: inline-block;
+        line-height: 1.5;
+        padding-right: 10px;
+        width: 126px;
+    }
+
+    ?
+    .tooltip-body .value-text {
+        display: inline-block;
+        line-height: 1.5;
+        width: 30px;
+    }
+/* styles.css */
+
+@keyframes btn-anim1 {
+    0% {
+        left: -100%;
+    }
+
+    50%, 100% {
+        left: 100%;
+    }
+}
+
+@keyframes btn-anim2 {
+    0% {
+        top: -100%;
+    }
+
+    50%, 100% {
+        top: 100%;
+    }
+}

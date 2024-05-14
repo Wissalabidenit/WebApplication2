@@ -1,0 +1,77 @@
+﻿@page
+@model WebApplication2.Pages.loginModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+<style>
+    .card {
+        background-color: #002f6c;
+        color: #FFF;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        transition: transform 0.3s ease-in-out; /* Animation pour la carte */
+    }
+
+    body {
+        background: linear-gradient(180deg,transparent,#03e9f4);
+        background: linear-gradient(to bottom right, #87ceeb, #4682b4);
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+        background-color: #f0f0f0; /* Gris clair */
+    }
+
+    .form-label {
+        font-weight: bold;
+    }
+
+    .form-control {
+        border-radius: 5px;
+    }
+
+    .btn.btn-primary {
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-weight: bold;
+        transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out; /* Animation pour le bouton */
+    }
+
+        .btn.btn-primary:hover {
+            background-color: #ddd; /* Gris plus foncé au survol */
+            border-color: #ddd; /* Gris plus foncé au survol */
+        }
+
+    .card:hover {
+        transform: translateY(-5px); /* Animation au survol de la carte */
+    }
+</style>
+
+<div class="row justify-content-center">
+    <div class="col-md-4">
+        <div class="card p-4 shadow-sm rounded">
+            <h2 class="text-center text-info mb-4">Login</h2> <!-- Taille de police inchangée -->
+            <form asp-action="Login" method="post" asp-route-returnurl="@ViewData["ReturnUrl"]">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="mb-3">
+                    <label asp-for="Username" class="form-label"></label>
+                    <input asp-for="Username" class="form-control" />
+                    <span asp-validation-for="Username" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Password" class="form-label"></label>
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
